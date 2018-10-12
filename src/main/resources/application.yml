@@ -1,0 +1,57 @@
+# Tomcat
+server:
+    tomcat:
+        uri-encoding: UTF-8
+        max-threads: 1000
+        min-spare-threads: 30
+    port: 8080
+    #打开注释，则通过【http://localhost/stat】访问
+    context-path: /TrasAddForMultiple
+
+spring:
+    # 环境 dev|test|pro
+    profiles:
+        active: dev
+    # jackson时间格式化
+    jackson:
+        time-zone: GMT+8
+        date-format: yyyy-MM-dd HH:mm:ss
+    http:
+        multipart:
+            max-file-size: 100MB
+            max-request-size: 100MB
+            enabled: true
+    resources: # 指定静态资源的路径
+        static-locations: classpath:/templates/,classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,classpath:/views/
+    # 解决同一个tomcat部署多个springboot项目
+    jmx:
+        default-domain: ditto
+        
+#    #邮件配置   
+    mail:  
+      host: smtp.cotis.cn
+      port: 
+      username: jiangbo@cotis.cn
+      password: sdt.20170828
+      properties:  
+        mail:  
+          SMTP:   
+            auth: true  
+            starttls:  
+              enable: true  
+              required: true  
+    freemarker:
+      template-loader-path: classpath:/templates/
+thymeleaf:
+        mode: LEGACYHTML5 
+        prefix: classpath:/templates/
+        suffix: .html 
+# Mybatis配置
+mybatis:
+    mapperLocations: classpath:mapper/**/*.xml
+    configLocation: classpath:mybatis.xml
+    
+client: 
+    addr: http://asiatic.ticp.net:1837/FTPService.asmx?wsdl
+
+

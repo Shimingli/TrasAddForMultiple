@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<title>jQuery UI Draggable - Default functionality</title>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <style>
+  #draggable { width: 150px; height: 150px; padding: 0.5em; }
+  </style>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="jquery.dragsort-0.5.2.min.js"></script>
+  <script>
+  $( function() {
+	  $("#tableid").dragsort({
+	        dragSelector : "li",  //可以不用设置，他会根据$("#tableid")的类型来决定是tr还是li
+	        dragEnd : function(){
+	            console.log("asddd");  //拖动完成的回调函数，$(this)当前拖动对象
+/* 	            console.log($(this));  //拖动完成的回调函数，$(this)当前拖动对象 */
+	        },
+	        scrollSpeed:0,  //默认为5，数值越大拖动的速度越快，为0则拖动时页面不会滚动
+	        dragSelectorExclude:"button,a[href]" 
+	    });
+  });
+  </script>
+</head>
+<body>
+ 	  <ul id="tableid" class="list-inline">
+ 	  	<li>
+ 	  		<img alt="" src="http://jqueryui.com/jquery-wp-content/themes/jquery/content/books/jquery-ui-in-action.jpg">
+ 	  		<!-- <button onclick="">111</button> -->
+ 	  		<input type="button" value="111">
+ 	  		<a href="">xxx</a>
+ 	  	</li>
+ 	  	<li>
+ 	  		<img alt="" src="http://jqueryui.com/jquery-wp-content/themes/jquery/content/books/jquery-ui-in-action.jpg">
+ 	  		<button onclick="">222</button>
+ 	  	</li>
+		<label id="label-1">Name:</label>
+ 	  		<img alt="" src="http://jqueryui.com/jquery-wp-content/themes/jquery/content/books/jquery-ui-in-action.jpg">
+ 	  		<button onclick="">222</button>
+ 	  	</li>
+ 	  </ul>
+</body>
+</html>

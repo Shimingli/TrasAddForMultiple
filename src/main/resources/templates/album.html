@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<link rel="stylesheet" href="../../css/bootstrap.min.css">
+<link rel="stylesheet" href="../../css/font-awesome.min.css">
+<link rel="stylesheet" href="../../plugins/jqgrid/ui.jqgrid-bootstrap.css">
+<link rel="stylesheet" href="../../plugins/ztree/css/metroStyle/metroStyle.css">
+<link rel="stylesheet" href="../../css/main.css">
+<link rel="stylesheet" href="../../libs/uploadifyfive/uploadifive.css" />
+<script src="../../libs/jquery.min.js"></script>
+<script src="../../plugins/layer/layer.js"></script>
+<script src="../../libs/bootstrap.min.js"></script>
+<script src="../../libs/vue.min.js"></script>
+<script src="../../plugins/jqgrid/grid.locale-cn.js"></script>
+<script src="../../plugins/jqgrid/jquery.jqGrid.min.js"></script>
+<script src="../../plugins/ztree/jquery.ztree.all.min.js"></script>
+<script src="../../js/common.js"></script>
+<script src="../../libs/uploadifyfive/jquery.uploadifive.js"></script>
+</head>
+<body>
+<div id="rrapp" v-cloak>
+	<div v-show="showList">
+		<div class="grid-btn row">
+			<div class="form-group col-md-2">
+				<a class="btn btn-primary" @click="add_album"><i class="fa fa-plus"></i>&nbsp;添加专题</a>
+			</div>
+			<div class="form-group col-md-2">
+				<a class="btn btn-primary" @click="add_albumBox"><i class="fa fa-plus"></i>&nbsp;添加合集</a>
+			</div>
+			<div class="form-group col-md-2">
+				<select class="form-control" id="albumLevel" @change="reload('')">
+					<option value="0">不选择</option>
+					<option value="1">专辑合集</option>
+					<option value="2">普通专辑</option>
+				</select>
+			</div>
+			<div class="form-group col-md-1">
+				<a class="btn btn-default" @click="backto">返回上一级</a>
+			</div>
+			<div class="form-group col-md-1">
+				<a class="btn btn-default" @click="saveOrder">保存排序</a>
+			</div>
+		</div>
+	    <table id="jqGrid"></table>
+	    <div id="jqGridPager"></div>
+    </div>
+    
+    <div v-show="!showList" class="panel panel-default">
+		<div class="panel-heading">{{title}}</div>
+		<form class="form-horizontal">
+			<div class="form-group">
+			   	<div class="col-sm-2 control-label">{{detail.name}}</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="album.name" placeholder=""/>
+			      <input type="hidden" v-model="album.id" id="albumId" />
+			    </div>
+			</div>
+			<div class="form-group">
+			   	<div class="col-sm-2 control-label">背景图片</div>
+			   	<div class="col-sm-10">
+			      <input type="hidden" id="albumBackimage" />
+				  <input type="file" id="backimageFile" name="backimageFile" />
+			  	  <img src="" width="80" height="80" id="albumBackimage_img" style="display:none;cursor:pointer; margin-top:10px;" /> 	
+			    </div>
+			</div>
+			<div class="form-group">
+			   	<div class="col-sm-2 control-label">封面</div>
+			   	<div class="col-sm-10">
+			      <input type="hidden" id="albumImage" />
+			      <input type="file" id="imageFile" name="imageFile" />
+			       <img src="" width="80" height="80" id="albumImage_img" style="display:none;cursor:pointer; margin-top:10px;" /> 	
+			    </div>
+			</div>
+			<div class="form-group">
+			   	<div class="col-sm-2 control-label">排序</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" id="sort" value="0" />
+			    </div>
+			</div>
+			<div class="form-group" id="parentDiv">
+			   	<div class="col-sm-2 control-label">专题合集</div>
+			   	<div class="col-sm-10">
+					<select class="form-control" id="parent"></select>
+			    </div>
+			</div>
+			<div class="form-group">
+			   	<div class="col-sm-2 control-label">{{detail.code}}</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="album.albumid" id="albumid"/>
+			      <input type="hidden" class="form-control" id="oldAlbumid"/>
+			    </div>
+			</div>
+			<div class="form-group" id="">
+			   	<div class="col-sm-2 control-label">来源类型</div>
+			   	<div class="col-sm-10">
+					<select class="form-control" id="source" v-model = "album.source">
+						<option value="0">蜜蜂市场</option>
+						<option value="1">应用商店</option>
+					</select>
+			    </div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-2 control-label"></div> 
+				<input type="button" class="btn btn-primary" @click="saveOrUpdate" value="确定"/>
+				&nbsp;&nbsp;<input type="button" class="btn btn-warning" @click="reload('')" value="返回"/>
+			</div>
+		</form>
+	</div>
+</div>
+
+<script src="../../js/modules/app/album.js"></script>
+</body>
+</html>

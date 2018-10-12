@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>首页</title>
+</head>
+<script type="text/javascript" src="jquery-1.9.1.js"></script>
+<body>
+	<h2>测试</h2>
+	<script type="text/javascript">
+		$(function(){
+		var dataList = [];
+		var param1 = {};	
+		param1.name = "jiangbo";
+		param1.addr = "成都";
+		var param2 = {};
+		param2.name = "ditto";
+		param2.addr = "ok";
+		dataList.push(param1);
+		dataList.push(param2);
+		var d = JSON.stringify(dataList);
+		debugger
+		$.ajax({
+			type:"post",
+			url:"/ditto/conn",
+			dataType:"json",
+			data:{asd:d},
+			sucess:function(data){
+				
+				}
+			})
+		
+		
+	/* 	$.post("/ditto/conn",paramList,function(data){
+		//	alert(data)
+			}); */
+		})
+	</script>
+</body>
+</html>

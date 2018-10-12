@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>首页</title>
+</head>
+<link href="css/jquery.dataTables.min.css" rel="stylesheet" />
+<script type="text/javascript" src="jquery-1.9.1.js"></script>
+<script type="text/javascript" src="jquery.dataTables.min.js">
+</script>
+<body>
+	<table id="table_id_example" class="display">
+    <thead>
+        <tr>
+            <th>Column 1</th>
+            <th>Column 2</th>
+            <th>Column 3</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Row 1</td>
+            <td>Row 1</td>
+        </tr>
+        <tr>
+            <td>Row 2</td>
+            <td>Row 2</td>
+        </tr>
+        <tr>
+            <td>Row 3</td>
+            <td>Row 3</td>
+        </tr>
+        <tr>
+            <td>Row 4</td>
+            <td>Row 4</td>
+        </tr>
+    </tbody>
+</table>
+
+<!--初始化Datatables-->
+<script type="text/javascript">
+	$(document).ready( function () {
+		var param = {};
+	    $('#table_id_example').DataTable({
+	    	"lengthChange": false,
+			"processing": true,
+			"searching": false,
+			"ordering": true,
+			"info": true,
+			"autoWidth": true,
+			"pageLength": 10,
+			"serverSide": true,
+			"destroy":true,
+			"oLanguage": {                          //汉化   
+				"sLengthMenu": "每页显示 _MENU_ 条记录",   
+				"sZeroRecords": "没有检索到数据",   
+				"sInfo": "显示第 _START_ 到第 _END_ 条数据；共 _TOTAL_ 条记录",   
+				"sInfoEmtpy": "没有数据",   
+				"sProcessing": "正在加载数据...",   
+				"oPaginate": {   
+					"sFirst": "首页",   
+					"sPrevious": "上一页",   
+					"sNext": "下一页",   
+					"sLast": "尾页"  
+				}   
+			},
+			"ajax": {
+				"url": "/ditto/testDataTable",
+				"type":"POST",
+				"data":param
+			},
+			"columns": [
+				{ "data": "model_name" },
+	             { "data": "eTimes_e" },
+	             { "data": "pTimes_e" }                         
+			] 
+		});
+    
+	} );
+</script>
+</body>
+</html>

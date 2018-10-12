@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>首页</title>
+</head>
+<script type="text/javascript" src="jquery-1.9.1.js"></script>
+<script type="text/javascript" src="testVue.js"></script>
+<script type="text/javascript" src="vue.min.js"></script>
+<script type="text/javascript" src="moment.js"></script>
+<body>
+	<h2>测试</h2>
+	<div id="example-2">
+	  <!-- `greet` 是在下面定义的方法名 -->
+	  <button v-on:click="greet">Greet</button>
+	<h3 v-show = "showLabel">{{la}}</h3>
+	<div>
+		<h3>{{name}}</h3>
+	</div>
+	</div>
+	<p id="pl">3</p>
+	<select id="sel">
+		<option value="1">测试1</option>
+		<option value="2">测试2</option>
+		<option value="3">测试3</option>
+	</select>
+</body>
+</html>

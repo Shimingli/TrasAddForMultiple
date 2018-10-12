@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lsm.dao.ActionRecordDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.lsm.entity.ActionRecordEntity" id="actionRecordMap">
+        <result property="id" column="id"/>
+        <result property="actions" column="actions"/>
+        <result property="actionTime" column="expo_date"/>
+    </resultMap>
+
+	<select id="queryObject" resultType="com.lsm.entity.ActionRecordEntity">
+		select * from action_record where id = #{value}
+	</select>
+	<select id="queryExist" resultType="com.lsm.entity.ActionRecordEntity">
+		select * from ${tbName} 
+		<where>
+			<if test="action !=null and action !=''">actions like concat('%',#{action},'%') </if>
+		</where>
+		limit 1
+	</select>
+
+	<select id="queryList" resultType="com.lsm.entity.ActionRecordEntity">
+		select * from ${tbName} 
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(1) from action_record 
+	</select>
+	 
+	<insert id="save" parameterType="com.lsm.entity.ActionRecordEntity" useGeneratedKeys="true" keyProperty="id">
+		insert into action_record
+		(
+			`actions`, 
+			`expo_date`
+		)
+		values
+		(
+			#{actions}, 
+			#{actionTime}
+		)
+	</insert>
+	
+	<insert id="saveBatch" parameterType="list">
+		insert into action_record
+		(
+			`actions`, 
+			`expo_date`
+		)
+		values
+		<foreach collection="list" item="action" index="index" separator=",">
+		(
+			#{action.actions}, 
+			#{action.actionTime}
+		)
+		</foreach>
+	</insert>
+	 
+	<update id="update" parameterType="com.lsm.entity.ActionRecordEntity">
+		update action_record 
+		<set>
+			<if test="actions != null">`actions` = #{actions}, </if>
+			<if test="actionTime != null">`expo_date` = #{actionTime}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete">
+		delete from action_record where id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from action_record where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

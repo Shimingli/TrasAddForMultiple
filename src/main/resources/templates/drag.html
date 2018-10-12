@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<title>jQuery UI Draggable - Default functionality</title>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <style>
+  #draggable { width: 150px; height: 150px; padding: 0.5em; }
+  </style>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( ".draggable" ).draggable({
+    	distance : 20,
+    	cancel:"a"
+        });
+  });
+  </script>
+</head>
+<body>
+ 
+	<ul class="list-inline">
+		<li class="draggable">
+		<!-- <p class="draggable">Drag me around</p> -->
+		<img alt="" src="http://jqueryui.com/jquery-wp-content/themes/jquery/content/books/jquery-ui-in-action.jpg">
+		</br>
+		<a href="xx">xx</a>
+		<!-- <button onclick="">ceshi</button> -->
+		</li>
+		<li>
+		<p class="draggable">Drag me around2</p>
+		</li>
+		<li>
+		<p class="draggable">Drag me around3</p>
+		</li>
+		<li>
+		<p class="draggable">Drag me around4</p>
+		</li>
+	</ul>
+</body>
+</html>
